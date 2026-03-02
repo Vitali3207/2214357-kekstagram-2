@@ -1,6 +1,6 @@
 // Функция для проверки длины строки.
 
-const checkStringLength = (string, maxLelgth) => string.length <= maxLelgth;
+const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
 checkStringLength();
 
@@ -19,6 +19,7 @@ const isPalindrom = (string) => {
 
 isPalindrom();
 
+
 const getNumber = (string) => {
   const numberString = string.toString().replace(/\D/g, '');
 
@@ -26,3 +27,4 @@ const getNumber = (string) => {
 };
 
 getNumber();
+
