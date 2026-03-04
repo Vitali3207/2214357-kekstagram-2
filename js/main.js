@@ -34,6 +34,7 @@ const MESSAGES = [
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
+
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
@@ -66,5 +67,5 @@ const createFotoDescription = () => ({
   comments: Array.from({ length: getRandomInteger(0, 30) }, createComentsPhoto)
 });
 
-const photoObject = Array.from({length: PHOTO_COUNT}, createFotoDescription);
+const photoObject = Array.from({ length: PHOTO_COUNT }, createFotoDescription);
 
