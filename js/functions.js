@@ -34,8 +34,10 @@
 const timeWorking = (timeStart, timeStop, timeMeet, duration) => {
   let start = timeStart.split(':');
   start = (parseInt(start[0], 10) * 60) + parseInt(start[1], 10);
+
   let end = timeStop.split(':');
   end = (parseInt(end[0], 10) * 60) + parseInt(end[1], 10);
+
   let meet = timeMeet.split(':');
   meet = (parseInt(meet[0], 10) * 60) + parseInt(meet[1], 10);
 
