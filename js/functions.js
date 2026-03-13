@@ -31,11 +31,11 @@
 
 // Функция из Доп.задания пятого раздела ДЗ.
 
-const timeWorking = (timeStart, timeStop, timeMeet, duration) => {
+const timeWorking = (timeStart, timeEnd, timeMeet, duration) => {
   let start = timeStart.split(':');
   start = (parseInt(start[0], 10) * 60) + parseInt(start[1], 10);
 
-  let end = timeStop.split(':');
+  let end = timeEnd.split(':');
   end = (parseInt(end[0], 10) * 60) + parseInt(end[1], 10);
 
   let meet = timeMeet.split(':');
