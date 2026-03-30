@@ -1,3 +1,3 @@
-import { generatePhotos } from './generator.js';
+import { usersPhotoList } from './rendering-thumbnails';
 
-console.log(generatePhotos());
+usersPhotoList();

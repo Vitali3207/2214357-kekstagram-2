@@ -29,21 +29,21 @@
 // getNumber();
 
 
-// Функция из Доп.задания пятого раздела ДЗ.
+// // Функция из Доп.задания пятого раздела ДЗ.
 
-const timeWorking = (timeStart, timeEnd, timeMeet, duration) => {
-  let start = timeStart.split(':');
-  start = (parseInt(start[0], 10) * 60) + parseInt(start[1], 10);
+// const timeWorking = (timeStart, timeEnd, timeMeet, duration) => {
+//   let start = timeStart.split(':');
+//   start = (parseInt(start[0], 10) * 60) + parseInt(start[1], 10);
 
-  let end = timeEnd.split(':');
-  end = (parseInt(end[0], 10) * 60) + parseInt(end[1], 10);
+//   let end = timeEnd.split(':');
+//   end = (parseInt(end[0], 10) * 60) + parseInt(end[1], 10);
 
-  let meet = timeMeet.split(':');
-  meet = (parseInt(meet[0], 10) * 60) + parseInt(meet[1], 10);
+//   let meet = timeMeet.split(':');
+//   meet = (parseInt(meet[0], 10) * 60) + parseInt(meet[1], 10);
 
-  return !!(start <= meet + duration && meet + duration <= end);
+//   return !!(start <= meet + duration && meet + duration <= end);
 
-};
-console.log(timeWorking('8:00', '17:30', '14:00', 212));
+// };
+// console.log(timeWorking('8:00', '17:30', '14:00', 212));
 
 // Алексей подскажи как тут лучше всего сделать рефакторинг?

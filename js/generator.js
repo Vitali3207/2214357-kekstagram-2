@@ -33,7 +33,7 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают., Как можно было поймать такой неудачный момент?!'
 ];
 
-const PHOTO_COUNT = 25;
+const PHOTO_COUNT = 26;
 
 const createIdGenirator = () => {
   let currentId = 0;
@@ -43,7 +43,7 @@ const createIdGenirator = () => {
 
 const generatePhotoId = createIdGenirator();
 const generateCommentsId = createIdGenirator();
-const generateUrl = createIdGenirator();
+
 
 const createComentsPhoto = () => ({
   id: generateCommentsId(),
@@ -54,10 +54,10 @@ const createComentsPhoto = () => ({
 
 const createPhoto = () => ({
   id: generatePhotoId(1, 25),
-  url: `photos/${generateUrl(1, 25)}.jpg`,
+  url: `photos/${getRandomInteger(1, 25)}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomInteger(15, 200),
-  comments: Array.from({ length: getRandomInteger(0, 30) }, createComentsPhoto)
+  comments: Array.from({ length: getRandomInteger(0, 30) }, createComentsPhoto),
+  likes: getRandomInteger(15, 200)
 });
 
 const generatePhotos = () => Array.from({ length: PHOTO_COUNT }, createPhoto);
