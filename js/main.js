@@ -1,3 +1,7 @@
-import { generatePhotos } from './generator.js';
+import { generatePhotos } from './generator';
+import { renderThumbnails } from './render-thumbnails';
 
-console.log(generatePhotos());
+const photos = generatePhotos();
+renderThumbnails(photos);
+
+
