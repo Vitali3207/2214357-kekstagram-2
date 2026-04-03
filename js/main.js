@@ -1,3 +1,7 @@
-import { usersPhotoList } from './rendering-thumbnails';
+import { generatePhotos } from './generator';
+import { renderThumbnails } from './render-thumbnails';
 
-usersPhotoList();
+const photos = generatePhotos();
+renderThumbnails(photos);
+
+
