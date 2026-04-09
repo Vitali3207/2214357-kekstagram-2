@@ -6,3 +6,4 @@ const photos = generatePhotos();
 renderThumbnails(photos);
 setPicturesListener(photos);
 
+

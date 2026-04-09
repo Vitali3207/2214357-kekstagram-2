@@ -13,7 +13,6 @@ const socialCommentTemplate = bigPicture.querySelector('.social__comment');
 const photoDescription = bigPicture.querySelector('.social__caption');
 const buttonLoader = document.querySelector('.comments-loader');
 const buttonClose = document.querySelector('.big-picture__cancel');
-socialComments.innerHTML = '';
 
 const onEscKeyDown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -41,11 +40,13 @@ const renderComments = (comments) => {
   socialComments.appendChild(fragment);
 };
 
-
 const renderBigPicture = (currentPhoto) => {
   bigPictureImage.src = currentPhoto.url;
   likesCount.textContent = currentPhoto.likes;
   photoDescription.textContent = currentPhoto.description;
+  socialComments.innerHTML = '';
+
+  renderComments(currentPhoto.comments);
 };
 
 function closeBigPicture () {
@@ -67,13 +68,13 @@ const openBigPicture = (currentPhoto) => {
 };
 
 const onPictureContainerClick = (evt, photos) => {
-  const currentUserPhotoId = evt.target.closest('.picture').dataset.pictureId;
+  const currentUserPhoto = evt.target.closest('.picture');
 
-  if(currentUserPhotoId) {
+  if(!currentUserPhoto) {
     return;
   }
 
-  const currentPhoto = photos.find((photo) => photo.id === Number(currentUserPhotoId));
+  const currentPhoto = photos.find((photo) => photo.id === Number(currentUserPhoto.dataset.pictureId));
 
   if(currentPhoto) {
     openBigPicture(currentPhoto);
@@ -82,9 +83,6 @@ const onPictureContainerClick = (evt, photos) => {
 
 const setPicturesListener = (photos) => {
   usersPhotoList.addEventListener('click', (evt) => onPictureContainerClick(evt, photos));
-
-  renderBigPicture(photos);
-
 };
 
 

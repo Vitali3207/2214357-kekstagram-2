@@ -1,4 +1,4 @@
-import { getRandomInteger, getRandomArrayElement } from './util.js';
+import { getRandomInteger, createPreviousRangeGenerator, getRandomArrayElement } from './util.js';
 
 const NAMES = [
   'Владимир',
@@ -43,6 +43,7 @@ const createIdGenirator = () => {
 
 const generatePhotoId = createIdGenirator();
 const generateCommentsId = createIdGenirator();
+const generateRangePreviousPhoto = createPreviousRangeGenerator(1, 25);
 
 
 const createComentsPhoto = () => ({
@@ -54,7 +55,7 @@ const createComentsPhoto = () => ({
 
 const createPhoto = () => ({
   id: generatePhotoId(1, 25),
-  url: `photos/${getRandomInteger(1, 25)}.jpg`,
+  url: `photos/${generateRangePreviousPhoto()}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   comments: Array.from({ length: getRandomInteger(0, 30) }, createComentsPhoto),
   likes: getRandomInteger(15, 200)});
@@ -63,3 +64,5 @@ const generatePhotos = () => Array.from({ length: PHOTO_COUNT }, createPhoto);
 
 
 export { generatePhotos };
+
+
