@@ -27,10 +27,10 @@ function validHashtags (value) {
     },
   ];
 
-  const checks = checksArray.every((elem) => {
-    const isInvalid = elem.check;
+  const checks = checksArray.every((element) => {
+    const isInvalid = element.check;
     if(isInvalid) {
-      errorMessage = elem.error;
+      errorMessage = element.error;
     }
     return(!isInvalid);
   });
