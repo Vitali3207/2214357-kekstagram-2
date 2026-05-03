@@ -13,7 +13,7 @@ const bootstrap = async () => {
     generateErrorMesaage();
   }
 };
-// НЕ ПОНЯЛ КАК РЕАЛИЗОВАТЬ С ПОМОЩЮ ЦЕПОЧЕК .then()?
+// НЕ ПОНЯЛ КАК РЕАЛИЗОВАТЬ С ПОМОЩЮ ЦЕПОЧЕК .then(), не запустилось?
 
 bootstrap();
 initUploadModal();
