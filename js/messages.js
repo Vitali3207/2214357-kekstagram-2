@@ -4,11 +4,11 @@ const MESSAGE_TIMEOUT = 5000;
 
 const errorLoadTemplate = document.querySelector('#data-error').content;
 const errorMessage = document.querySelector('.data-error__title');
-const successTemplate = document.querySelector('#success').content;
-const messageErrorTemplate = document.querySelector('#error').content;
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const messageErrorTemplate = document.querySelector('#error').content.querySelector('.error');
 
-let errorMessageContainer;
-let successMessageContainer;
+let errorMessageContainer = null;
+let successMessageContainer = null;
 
 const generateErrorMessage = (message) => {
   const errorLoad = errorLoadTemplate.cloneNode(true);
@@ -33,48 +33,54 @@ const closeMessage = () => {
 
   if(errorMessageContainer) {
     errorMessageContainer.remove();
-
   }
+
+  document.body.removeEventListener('click', onBodyCancelClick);
+  document.body.removeEventListener('keydown', onEscKeyDownMessage);
+  errorMessageContainer = null;
+  successMessageContainer = null;
 };
+
 
 const onMessageCloseButton = (container) => {
   container.remove();
 };
 
-const onEscKeyDownMessage = (evt) => {
+function onEscKeyDownMessage (evt) {
   if (isEscapeKey(evt)) {
     closeMessage();
-    document.body.removeEventListener('keydown', onEscKeyDownMessage);
   }
-};
+}
 
-const onBodyCanselClick = (evt) => {
-  if(evt.target === successMessageContainer || errorMessageContainer) {
+function onBodyCancelClick (evt) {
+  if(evt.target === successMessageContainer || evt.target === errorMessageContainer) {
     closeMessage();
-    document.body.removeEventListener('click', onBodyCanselClick);
   }
+}
+
+const hasErrorMessage = () => errorMessageContainer !== null;
+
+const showPopupMessage = (node) => {
+  const button = node.querySelector('button');
+
+  document.body.append(node);
+  button.addEventListener('click', () => onMessageCloseButton(node));
+  document.body.addEventListener('click', onBodyCancelClick);
+  document.body.addEventListener('keydown', onEscKeyDownMessage);
 };
 
 const showSuccessMessage = () => {
-  const successLoad = successTemplate.cloneNode(true);
-  successMessageContainer = successLoad.querySelector('.success');
-  const successMessageButton = successLoad.querySelector('.success__button');
+  const successNode = successTemplate.cloneNode(true);
+  successMessageContainer = successNode;
 
-  document.body.append(successLoad);
-  successMessageButton.addEventListener('click', () => onMessageCloseButton(successMessageContainer));
-  document.body.addEventListener('keydown', onEscKeyDownMessage);
-  document.body.addEventListener('click', onBodyCanselClick);
+  showPopupMessage(successNode);
 };
 
 const showErrorMessage = () => {
-  const errorLoad = messageErrorTemplate.cloneNode(true);
-  errorMessageContainer = errorLoad.querySelector('.error');
-  const errorMessageButton = errorLoad.querySelector('.error__button');
+  const errorNode = messageErrorTemplate.cloneNode(true);
+  errorMessageContainer = errorNode;
 
-  document.body.append(errorLoad);
-  errorMessageButton.addEventListener('click', () => onMessageCloseButton(errorMessageContainer));
-  document.body.addEventListener('keydown', onEscKeyDownMessage);
-  document.body.addEventListener('click', onBodyCanselClick);
+  showPopupMessage(errorNode);
 };
 
-export { generateErrorMessage, showSuccessMessage, showErrorMessage, errorMessageContainer };
+export { generateErrorMessage, showSuccessMessage, showErrorMessage, hasErrorMessage };

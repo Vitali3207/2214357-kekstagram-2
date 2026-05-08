@@ -2,6 +2,7 @@ const usersPhotoList = document.querySelector('.pictures');
 const thumbnails = document.querySelector('#picture').content.querySelector('.picture');
 
 const renderThumbnails = (userPhoto) => {
+  usersPhotoList.querySelectorAll('.picture').forEach((photo) => photo.remove());
   const photoFragment = document.createDocumentFragment();
 
   userPhoto.forEach((photo) => {

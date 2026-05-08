@@ -3,7 +3,7 @@ import { initScale, resetScale } from './image-scale';
 import { initValidation, validateForm } from './validation';
 import { initEffect, resetEffect } from './slider-effect';
 import { sendData } from '../load-data';
-import { showSuccessMessage, showErrorMessage, errorMessageContainer } from '../messages';
+import { showSuccessMessage, showErrorMessage, hasErrorMessage } from '../messages';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
@@ -14,7 +14,7 @@ const descriptionInput = uploadForm.querySelector('.text__description');
 
 
 const onEscKeyDown = (evt) => {
-  if (isEscapeKey(evt) && (document.activeElement !== hashtagsInput || document.activeElement !== descriptionInput) && !errorMessageContainer) {
+  if (isEscapeKey(evt) && (document.activeElement !== hashtagsInput || document.activeElement !== descriptionInput) && !hasErrorMessage) {
     closeUploadModal();
   }
 };
@@ -45,23 +45,20 @@ const openUploadModal = () => {
   initValidation();
 };
 
-const sendFormData = async (formElement) => {
+const onFormSubmit = async (evt) => {
+  evt.preventDefault();
+
   const isValid = validateForm();
 
   if (isValid) {
     try {
-      await sendData(new FormData(formElement));
+      await sendData(new FormData(evt.target));
       closeUploadModal();
       showSuccessMessage();
     } catch (error) {
       showErrorMessage();
     }
   }
-};
-
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  sendFormData(evt.target);
 };
 
 const initUploadModal = () => {
