@@ -13,7 +13,7 @@ const buttonLoader = document.querySelector('.comments-loader');
 const buttonClose = document.querySelector('.big-picture__cancel');
 socialComments.innerHTML = '';
 
-const COMMENTS__STEP = 5;
+const COMMENTS_STEP = 5;
 let commentCount = 0;
 let currentComments = [];
 
@@ -29,7 +29,7 @@ const onPictureCancelClick = () => {
 };
 
 const onShowMoreButtonClick = () => {
-  const renderingNewComments = currentComments.slice(commentCount, commentCount + COMMENTS__STEP);
+  const renderingNewComments = currentComments.slice(commentCount, commentCount + COMMENTS_STEP);
   const newCommentsLength = renderingNewComments.length += commentCount;
   const fragment = document.createDocumentFragment();
 
@@ -50,7 +50,7 @@ const onShowMoreButtonClick = () => {
   if (newCommentsLength >= currentComments.length) {
     buttonLoader.classList.add('hidden');
   }
-  commentCount += COMMENTS__STEP;
+  commentCount += COMMENTS_STEP;
 };
 
 const renderComments = (currentPhotoComments) => {
@@ -111,5 +111,5 @@ const setPicturesListener = (photos) => {
   usersPhotoList.addEventListener('click', (evt) => onPictureContainerClick(evt, photos));
 };
 
-export { setPicturesListener, onEscKeyDown };
+export { setPicturesListener, onEscKeyDown, renderBigPicture };
 
