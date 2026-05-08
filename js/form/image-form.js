@@ -3,15 +3,18 @@ import { initScale, resetScale } from './image-scale';
 import { initValidation, validateForm } from './validation';
 import { initEffect, resetEffect } from './slider-effect';
 import { sendData } from '../load-data';
-import { showSuccessMessage, showErrorMessage, hasErrorMessage } from '../messages';
+import { generateErrorMessage, showSuccessMessage, showErrorMessage, hasErrorMessage } from '../messages';
+
+const FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif'];
 
 const uploadForm = document.querySelector('.img-upload__form');
-const uploadInput = uploadForm.querySelector('.img-upload__input');
 const formOverlay = uploadForm.querySelector('.img-upload__overlay');
 const buttonCloseUpload = uploadForm.querySelector('.img-upload__cancel');
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const descriptionInput = uploadForm.querySelector('.text__description');
-
+const fileChooser = document.querySelector('.img-upload__wrapper input[type=file]');
+const preview = document.querySelector('.img-upload__preview img');
+const uploadFormEffects = uploadForm.querySelectorAll('.effects__preview');
 
 const onEscKeyDown = (evt) => {
   if (isEscapeKey(evt) && (document.activeElement !== hashtagsInput || document.activeElement !== descriptionInput) && !hasErrorMessage) {
@@ -28,6 +31,7 @@ function closeUploadModal () {
   document.querySelector('body').classList.remove('.modal-open');
   document.removeEventListener('keydown', onEscKeyDown);
   buttonCloseUpload.removeEventListener('click', onUploadCancelClick);
+  fileChooser.removeEventListener('change', onFileChooserChange);
 
   resetEffect();
   resetScale();
@@ -44,6 +48,25 @@ const openUploadModal = () => {
   initScale();
   initValidation();
 };
+
+function onFileChooserChange () {
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
+
+  if (matches) {
+    preview.src = URL.createObjectURL(file);
+    uploadFormEffects.forEach((item) => {
+      item.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
+  }else {
+    generateErrorMessage();
+    return;
+  }
+
+  openUploadModal();
+}
 
 const onFormSubmit = async (evt) => {
   evt.preventDefault();
@@ -63,10 +86,7 @@ const onFormSubmit = async (evt) => {
 
 const initUploadModal = () => {
   uploadForm.addEventListener('submit', onFormSubmit);
-
-  uploadInput.addEventListener('change', () => {
-    openUploadModal();
-  });
+  fileChooser.addEventListener('change', onFileChooserChange);
 };
 
 export { initUploadModal };
