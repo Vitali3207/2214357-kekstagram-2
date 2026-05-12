@@ -17,7 +17,7 @@ const preview = document.querySelector('.img-upload__preview img');
 const uploadFormEffects = uploadForm.querySelectorAll('.effects__preview');
 
 const onEscKeyDown = (evt) => {
-  if (isEscapeKey(evt) && (document.activeElement !== hashtagsInput || document.activeElement !== descriptionInput) && !hasErrorMessage) {
+  if (isEscapeKey(evt) && (document.activeElement !== hashtagsInput || document.activeElement !== descriptionInput) && !hasErrorMessage()) {
     closeUploadModal();
   }
 };
@@ -59,14 +59,13 @@ function onFileChooserChange () {
     uploadFormEffects.forEach((item) => {
       item.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
     });
+
+    openUploadModal();
+
   } else {
     fileChooser.value = '';
     generateErrorMessage('неверный формат файла!');
-    return;
-    // получилось повторно показывать сообщение
   }
-
-  openUploadModal();
 }
 
 const onFormSubmit = async (evt) => {
