@@ -3,7 +3,6 @@ import { isEscapeKey } from './util';
 const MESSAGE_TIMEOUT = 5000;
 
 const errorLoadTemplate = document.querySelector('#data-error').content;
-const errorMessage = document.querySelector('.data-error__title');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const messageErrorTemplate = document.querySelector('#error').content.querySelector('.error');
 
@@ -14,7 +13,7 @@ const generateErrorMessage = (message) => {
   const errorLoad = errorLoadTemplate.cloneNode(true);
 
   if (message) {
-    errorMessage.textContent = message;
+    errorLoad.querySelector('.data-error__title').textContent = message;
   }
 
   document.body.append(errorLoad);

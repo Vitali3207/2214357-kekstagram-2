@@ -35,8 +35,6 @@ function closeUploadModal () {
   resetEffect();
   resetScale();
   uploadForm.reset();
-  fileChooser.reset();
-  // При повторной попытке отправить неверный формата файла ошибка не появляется. Подскажи как реализовать.
 }
 
 const openUploadModal = () => {
@@ -61,9 +59,11 @@ function onFileChooserChange () {
     uploadFormEffects.forEach((item) => {
       item.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
     });
-  }else {
-    generateErrorMessage();
+  } else {
+    fileChooser.value = '';
+    generateErrorMessage('неверный формат файла!');
     return;
+    // получилось повторно показывать сообщение
   }
 
   openUploadModal();
