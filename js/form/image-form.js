@@ -12,12 +12,13 @@ const formOverlay = uploadForm.querySelector('.img-upload__overlay');
 const buttonCloseUpload = uploadForm.querySelector('.img-upload__cancel');
 const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const descriptionInput = uploadForm.querySelector('.text__description');
-const fileChooser = document.querySelector('.img-upload__wrapper input[type=file]');
+const fileChooser = document.querySelector('.img-upload__input');
 const preview = document.querySelector('.img-upload__preview img');
 const uploadFormEffects = uploadForm.querySelectorAll('.effects__preview');
 
 const onEscKeyDown = (evt) => {
   if (isEscapeKey(evt) && (document.activeElement !== hashtagsInput || document.activeElement !== descriptionInput) && !hasErrorMessage()) {
+
     closeUploadModal();
   }
 };
