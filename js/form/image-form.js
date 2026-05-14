@@ -3,7 +3,7 @@ import { initScale, resetScale } from './image-scale';
 import { initValidation, validateForm } from './validation';
 import { initEffect, resetEffect } from './slider-effect';
 import { sendData } from '../load-data';
-import { generateErrorMessage, showSuccessMessage, showErrorMessage, hasErrorMessage } from '../messages';
+import { generateErrorMessage, showSuccessMessage, showErrorMessage, hasErrorMessage, closeMessage } from '../messages';
 
 const FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif'];
 
@@ -17,10 +17,16 @@ const preview = document.querySelector('.img-upload__preview img');
 const uploadFormEffects = uploadForm.querySelectorAll('.effects__preview');
 
 const onEscKeyDown = (evt) => {
-  if (isEscapeKey(evt) && (document.activeElement !== hashtagsInput || document.activeElement !== descriptionInput) && !hasErrorMessage()) {
-
-    closeUploadModal();
+  if (isEscapeKey(evt) && (document.activeElement === hashtagsInput || document.activeElement === descriptionInput)) {
+    return;
   }
+
+  if(hasErrorMessage()) {
+    closeMessage();
+    return;
+  }
+
+  closeUploadModal();
 };
 
 const onUploadCancelClick = () => {
